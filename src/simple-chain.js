@@ -7,24 +7,44 @@ const { NotImplementedError } = require('../lib');
  */
 const chainMaker = {
   getLength() {
-    // Remove line below and write your code here
-    throw new NotImplementedError('Not implemented');
+    if(this.hasOwnProperty('chain')) {
+      return this.chain.length;
+    }
+    return 0;
   },
-  addLink(/* value */) {
-    // Remove line below and write your code here
-    throw new NotImplementedError('Not implemented');
+  addLink(value) {
+    if(!this.hasOwnProperty('chain')) {
+      this.chain = [];
+    }
+    arguments.length ? this.chain.push(value) : this.chain.push('  ');    
+    return this;
   },
-  removeLink(/* position */) {
-    // Remove line below and write your code here
-    throw new NotImplementedError('Not implemented');
+  removeLink(position) {
+    const errorMessage = "You can't remove incorrect link!";
+    if(!this.hasOwnProperty('chain') || !this.chain.length) {
+      this.chain = [];
+      throw new Error(errorMessage);
+    }
+    if(!Number.isInteger(position) || position < 1 || position > this.chain.length) {
+      this.chain = [];
+      throw new Error(errorMessage);
+    }
+    this.chain.splice(position - 1, 1);
+    return this;
   },
   reverseChain() {
-    // Remove line below and write your code here
-    throw new NotImplementedError('Not implemented');
+    if(this.hasOwnProperty('chain') && this.chain.length) {
+      this.chain = this.chain.reverse();
+    }
+    return this;
   },
   finishChain() {
-    // Remove line below and write your code here
-    throw new NotImplementedError('Not implemented');
+    let resultchain = '';
+    if(this.hasOwnProperty('chain') && this.chain.length) {
+      resultchain = this.chain.map((item) => `( ${item} )`).join('~~');
+    }
+    this.chain = [];
+    return resultchain;
   },
 };
 
