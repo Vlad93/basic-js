@@ -23,9 +23,46 @@ const { NotImplementedError } = require('../lib');
  *  [1, 1, 1]
  * ]
  */
-function minesweeper(/* matrix */) {
-  // Remove line below and write your code here
-  throw new NotImplementedError('Not implemented');
+function minesweeper(matrix) {
+  const resultArr = [...matrix].map((arr) => arr.map((item) => 0));
+  for (let i = 0; i < matrix.length; i++) {
+    for (let j = 0; j < matrix[i].length; j++) {
+      // left 
+      if(j - 1 >= 0 && matrix[i][j - 1]) {
+        resultArr[i][j] += 1;
+      }
+      // right 
+      if((j + 1 < matrix[i].length) && matrix[i][j + 1]) {
+        resultArr[i][j] += 1;
+      }
+      // bottom 
+      if(i + 1 < matrix.length && matrix[i + 1][j]) {
+        resultArr[i][j] += 1;
+      }
+      // top 
+      if(i - 1 >= 0 && matrix[i - 1][j]) {
+        resultArr[i][j] += 1;
+      }
+      // axes
+      if(i + 1 < matrix.length) {
+        if(j - 1 >= 0 && matrix[i + 1][j - 1]) {
+          resultArr[i][j] += 1;
+        }
+        if(j - 1 < matrix[i].length && matrix[i + 1][j + 1]) {
+          resultArr[i][j] += 1;
+        } 
+      }
+      if(i - 1 >= 0) {
+        if(j - 1 >= 0 && matrix[i - 1][j - 1]) {
+          resultArr[i][j] += 1;
+        }
+        if(j - 1 < matrix[i].length && matrix[i - 1][j + 1]) {
+          resultArr[i][j] += 1;
+        } 
+      }
+    };
+  }
+  return resultArr;
 }
 
 module.exports = {
