@@ -23,7 +23,6 @@ function getMatrixElementsSum(matrix) {
       if(idx === 0) {
         acc += item[i];
       } else {
-        console.log(arr[idx - 1][i])
         if (arr[idx - 1][i] !== 0) {
           acc += item[i];
         }
