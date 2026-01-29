@@ -19,7 +19,6 @@ const { NotImplementedError } = require('../lib');
 function getMatrixElementsSum(matrix) {
   console.log(matrix);
   const result = matrix.reduce((acc, item, idx, arr) => {
-    console.log(acc);
     for (let i = 0; i < item.length; i++) {
       if(idx === 0) {
         acc += item[i];

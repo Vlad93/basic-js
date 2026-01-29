@@ -11,9 +11,21 @@ const { NotImplementedError } = require('../lib');
  *
  * The result should be [-1, 150, 160, 170, -1, -1, 180, 190]
  */
-function sortByHeight(/* arr */) {
-  // Remove line below and write your code here
-  throw new NotImplementedError('Not implemented');
+function sortByHeight(arr) {
+  if(!arr.includes(-1)) {
+    return arr.sort((a, b) => a - b);
+  }
+  const indexesOfMinusOne = arr.reduce((acc, item, idx) => {
+    if (item === -1) {
+      acc.push(idx);
+    }
+    return acc;
+  }, []);
+  let sortedArr = arr.filter((item) => item !== -1).sort((a, b) => a - b);
+  for (let i = 0; i < indexesOfMinusOne.length; i++) {
+    sortedArr.splice(indexesOfMinusOne[i], 0, -1);
+  }
+  return sortedArr;
 }
 
 module.exports = {
